@@ -1,3 +1,6 @@
+require 'set'
+require 'pry'
+
 #Objective - Write an efficient method that checks whether any permutaion of an input string is a palindrome
 
 # assume that all given strings are in lowercase
@@ -17,3 +20,24 @@
 
 #Solution - check that each character apears an even number of times allowing for only one character to apear an odd number of time. The middle character. This is enough to determine if a permutation of the input string is a palindrome.
 
+def has_palindrome_permutation(the_string)
+
+  unpaired_characters = Set.new
+
+  (0...the_string.length).each do |i|
+    
+    char = the_string[i]
+
+    if unpaired_characters.include?(char)
+      unpaired_characters.delete(char)
+    else 
+      unpaired_characters.add(char)
+    end
+  
+  end
+
+  #the string has a palindrome permutation if it has one or zero charcters withought a pair
+
+  return unpaired_characters.length <= 1
+
+end
